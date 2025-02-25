@@ -89,8 +89,8 @@ type WebView interface {
 	// NSWindow pointer, when using Win32 backend the pointer is HWND pointer.
 	Window() unsafe.Pointer
 
-    // Widget returns a native handle based on the kind requested.
-    Widget(NativeHandleKind) unsafe.Pointer
+    // NativeHandle returns a native handle based on the kind requested.
+    NativeHandle(NativeHandleKind) unsafe.Pointer
 
 	// SetTitle updates the title of the native window. Must be called from the UI
 	// thread.
@@ -168,7 +168,7 @@ func NewWindow(debug bool, window unsafe.Pointer) WebView {
 	return w
 }
 
-func (w *webview) Widget(kind NativeHandleKind) unsafe.Pointer {
+func (w *webview) NativeHandle(kind NativeHandleKind) unsafe.Pointer {
     return C.webview_get_native_handle(w.w, kind)
 }
 
